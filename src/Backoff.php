@@ -10,6 +10,7 @@ class Backoff implements BackoffInterface
 
     /**
      * @param array $options Configuration options.
+     * @throws \InvalidArgumentException.
      */
     public function __construct($options = array())
     {
