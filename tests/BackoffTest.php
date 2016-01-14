@@ -25,6 +25,43 @@ class BackoffTest extends TestCase
         );
     }
 
+    public function testCreateInstanceWithOptions()
+    {
+        $options = Backoff::getDefaultOptions();
+        $options['cap'] = 2000000;
+        $options['maxAttemps'] = 10;
+
+        $backoff = new Backoff($options);
+
+        $this->assertInstanceOf(
+            'Yriveiro\Backoff\Backoff',
+            $backoff,
+            "Backoff should be an instance of Yriveiro\Backoff\Backoff"
+        );
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testCreateInstanceWithOptionsCapNotInteger()
+    {
+        $options = Backoff::getDefaultOptions();
+        $options['cap'] = 'foo';
+
+        $backoff = new Backoff($options);
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testCreateInstanceWithOptionsMaxAttempsNotInteger()
+    {
+        $options = Backoff::getDefaultOptions();
+        $options['maxAttemps'] = 'foo';
+
+        $backoff = new Backoff($options);
+    }
+
     public function testDefaultOptions()
     {
         $actual = Backoff::getDefaultOptions();
@@ -53,6 +90,23 @@ class BackoffTest extends TestCase
         $this->assertEquals($expected, $options->getValue($this->backoff));
     }
 
+    public function testSetOptionsNotAnArray()
+    {
+        $options = 10;
+
+        $this->backoff->setOptions($options);
+
+        $options = new ReflectionProperty($this->backoff, 'options');
+        $options->setAccessible(true);
+
+        $expected = array(
+            0 => 10,
+            'cap' => 1000000,
+            'maxAttemps' => 0
+        );
+
+        $this->assertEquals($expected, $options->getValue($this->backoff));
+    }
     public function testExponential()
     {
         $backoff = $this->backoff->exponential(1);
