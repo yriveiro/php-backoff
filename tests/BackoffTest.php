@@ -5,6 +5,7 @@ use ReflectionMethod;
 use ReflectionProperty;
 use InvalidArgumentException;
 use Yriveiro\Backoff\Backoff;
+use Yriveiro\Backoff\BackoffException;
 use PHPUnit_Framework_TestCase as TestCase;
 
 class BackoffTest extends TestCase
@@ -107,6 +108,21 @@ class BackoffTest extends TestCase
 
         $this->assertEquals($expected, $options->getValue($this->backoff));
     }
+
+    /**
+     * @expectedException \Yriveiro\Backoff\BackoffException
+     */
+    public function testMaxAttempts()
+    {
+        $options['maxAttemps'] = 3;
+
+        $this->backoff->setOptions($options);
+
+        foreach (range(1, 10) as $attempt) {
+            $this->backoff->exponential($attempt);
+        }
+    }
+
     public function testExponential()
     {
         $backoff = $this->backoff->exponential(1);

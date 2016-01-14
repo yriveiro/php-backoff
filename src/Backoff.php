@@ -2,6 +2,7 @@
 namespace Yriveiro\Backoff;
 
 use InvalidArgumentException;
+use Yriveiro\Backoff\BackoffException;
 use Yriveiro\Backoff\BackoffInterface;
 
 class Backoff implements BackoffInterface
@@ -81,6 +82,17 @@ class Backoff implements BackoffInterface
 
         if ($attempt < 1) {
             throw new InvalidArgumentException('Attempt must be >= 1');
+        }
+
+        if ($this->options['maxAttemps'] > 1
+            && $attempt > $this->options['maxAttemps']
+        ) {
+            throw new BackoffException(
+                sprintf(
+                    "The number of max attempts (%s) was exceeded",
+                    $this->options['maxAttemps']
+                )
+            );
         }
 
         $wait = (1 << ($attempt - 1)) * 1000;
