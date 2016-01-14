@@ -1,7 +1,7 @@
 Backoff, Simple backoff / retry functionality
 --------------------------------------------------
 
-[![Build Status](https://travis-ci.org/yriveiro/php-backoff.svg?branch=master)](https://travis-ci.org/yriveiro/php-backoff.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/yriveiro/php-backoff/badge.svg?branch=master&service=github)](https://coveralls.io/github/yriveiro/php-backoff?branch=master)
+[![Build Status](https://travis-ci.org/yriveiro/php-backoff](https://travis-ci.org/yriveiro/php-backoff.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/yriveiro/php-backoff/badge.svg?branch=master&service=github)](https://coveralls.io/github/yriveiro/php-backoff?branch=master)
 
 Installation
 ------------
