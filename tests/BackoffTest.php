@@ -9,21 +9,6 @@ use PHPUnit_Framework_TestCase as TestCase;
 
 class BackoffTest extends TestCase
 {
-    private function elapsed()
-    {
-        static $last = null;
-
-        $now = microtime(true);
-
-        if ($last != null) {
-            $elapsed = ($now - $last) * 1000;
-
-            echo "\n<!-- $elapsed -->\n";
-        }
-
-        $last = $now;
-    }
-
     public function setUp()
     {
         $this->backoff = new Backoff();
