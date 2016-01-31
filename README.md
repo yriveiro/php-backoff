@@ -24,16 +24,16 @@ Exponential backoff has one disadvantage. In high concurrence, we can have multi
 
 To solve this we can add a jitter value to allow some randomization.
 
-Equal jitter use the function `E(attempt) = min(((2**attempt - 1) / 2), random(0, ((2**attempt - 1) / 2)))`.
+`equalJitter` uses the function: `E(attempt) = min(((2**attempt - 1) / 2), random(0, ((2**attempt - 1) / 2)))`.
 
 #### Parameters
 - `attempt`: incremental value that represents the current retry number.
 
 ### fullJitter($attempt);
 
-Full jitter behaves like `equalJitter method`, the main difference between them is the way in how the jitter value is calculated.
+Full jitter behaves like `equalJitter` method, the main difference between them is the way in how the jitter value is calculated.
 
-In `fullJitter` method the function is `E(attempt) = min(random(0, (2**attempt - 1) / 2))`.
+`fullJitter` uses the function: `E(attempt) = min(random(0, (2**attempt - 1) / 2))`.
 
 #### Parameters
 - `attempt`: incremental value that represents the current retry number.
