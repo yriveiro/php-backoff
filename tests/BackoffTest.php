@@ -30,7 +30,7 @@ class BackoffTest extends TestCase
     {
         $options = Backoff::getDefaultOptions();
         $options['cap'] = 2000000;
-        $options['maxAttemps'] = 10;
+        $options['maxAttempts'] = 10;
 
         $backoff = new Backoff($options);
 
@@ -55,10 +55,10 @@ class BackoffTest extends TestCase
     /**
      * @expectedException \InvalidArgumentException
      */
-    public function testCreateInstanceWithOptionsMaxAttempsNotInteger()
+    public function testCreateInstanceWithOptionsmaxAttemptsNotInteger()
     {
         $options = Backoff::getDefaultOptions();
-        $options['maxAttemps'] = 'foo';
+        $options['maxAttempts'] = 'foo';
 
         $backoff = new Backoff($options);
     }
@@ -68,7 +68,7 @@ class BackoffTest extends TestCase
         $actual = Backoff::getDefaultOptions();
         $expected = array(
             'cap' => 1000000,
-            'maxAttemps' => 0
+            'maxAttempts' => 0
         );
 
         $this->assertEquals($expected, $actual, "Default options differ");
@@ -76,7 +76,7 @@ class BackoffTest extends TestCase
 
     public function testSetOptions()
     {
-        $options['maxAttemps'] = 10;
+        $options['maxAttempts'] = 10;
 
         $this->backoff->setOptions($options);
 
@@ -85,7 +85,7 @@ class BackoffTest extends TestCase
 
         $expected = array(
             'cap' => 1000000,
-            'maxAttemps' => 10
+            'maxAttempts' => 10
         );
 
         $this->assertEquals($expected, $options->getValue($this->backoff));
@@ -103,7 +103,7 @@ class BackoffTest extends TestCase
         $expected = array(
             0 => 10,
             'cap' => 1000000,
-            'maxAttemps' => 0
+            'maxAttempts' => 0
         );
 
         $this->assertEquals($expected, $options->getValue($this->backoff));
@@ -114,7 +114,7 @@ class BackoffTest extends TestCase
      */
     public function testMaxAttempts()
     {
-        $options['maxAttemps'] = 3;
+        $options['maxAttempts'] = 3;
 
         $this->backoff->setOptions($options);
 

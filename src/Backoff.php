@@ -21,8 +21,8 @@ class Backoff implements BackoffInterface
             throw new InvalidArgumentException('Cap must be a number');
         }
 
-        if (!is_int($this->options['maxAttemps'])) {
-            throw new InvalidArgumentException('maxAttemps must be a number');
+        if (!is_int($this->options['maxAttempts'])) {
+            throw new InvalidArgumentException('maxAttempts must be a number');
         }
     }
 
@@ -31,7 +31,7 @@ class Backoff implements BackoffInterface
      *
      * cap:         Max duration allowed (in microseconds). If backoff duration
      *              is greater than cap, cap is returned.
-     * maxAttemps:  Number of attemps before thrown an Yriveiro\Backoff\BackoffException.
+     * maxAttempts:  Number of attemps before thrown an Yriveiro\Backoff\BackoffException.
      *
      * @return mixed
      */
@@ -39,7 +39,7 @@ class Backoff implements BackoffInterface
     {
         return array(
             'cap' => 1000000,
-            'maxAttemps' => 0
+            'maxAttempts' => 0
         );
     }
 
@@ -84,13 +84,13 @@ class Backoff implements BackoffInterface
             throw new InvalidArgumentException('Attempt must be >= 1');
         }
 
-        if ($this->options['maxAttemps'] > 1
-            && $attempt > $this->options['maxAttemps']
+        if ($this->options['maxAttempts'] > 1
+            && $attempt > $this->options['maxAttempts']
         ) {
             throw new BackoffException(
                 sprintf(
                     "The number of max attempts (%s) was exceeded",
-                    $this->options['maxAttemps']
+                    $this->options['maxAttempts']
                 )
             );
         }
