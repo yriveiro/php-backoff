@@ -103,7 +103,7 @@ php vendor/bin/phpunit tests
 
 # Know issues
 
-None
+None.
 
 # How to contribute
 
