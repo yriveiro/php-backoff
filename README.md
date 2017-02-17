@@ -101,6 +101,14 @@ Tests are performed using the `phpunit` library, to run them:
 php vendor/bin/phpunit tests
 ```
 
+# Know issues
+
+None
+
+# How to contribute
+
+Have an idea? Found a bug?, contributions are welcome :)
+
 # License
 
 Backoff is licensed under MIT license.
