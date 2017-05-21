@@ -1,5 +1,6 @@
 {
     "name": "yriveiro/php-backoff",
+    "description": "Simple backoff / retry functionality",
     "type": "library",
     "keywords": ["exponential backoff", "backoff", "jitter", "retry"],
     "minimum-stability": "stable",
@@ -26,3 +27,4 @@
         }
     }
 }
+
