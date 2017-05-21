@@ -10,6 +10,7 @@
         "email": "yago.riveiro@gmail.com"
     }],
     "require": {
+        "php": ">=5.3.3 || ^7.0",
         "paragonie/random_compat": "^2.0"
     },
     "require-dev": {
