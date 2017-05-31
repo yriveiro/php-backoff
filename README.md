@@ -73,7 +73,7 @@ $backoff = new Backoff($options);
 $response = $http->get('http://myservice.com/user/1');
 
 try
-    while (!response) {
+    while (!$response) {
         $time = $backoff->fullJitter($attempt);
         $attempt++;
 
