@@ -51,7 +51,7 @@ $backoff = new Backoff();
 
 $response = $http->get('http://myservice.com/user/1');
 
-while (!response) {
+while (!$response) {
     $time = $backoff->exponential($attempt);
     $attempt++;
 
