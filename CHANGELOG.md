@@ -4,9 +4,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 2.0.0 - 2017-07-04
 ### Changed
+- Removed unused dependency random compact
+
+## 2.0.0 - 2017-07-04
+### Changed
 - Major version 2.x only supports php >= 7.0
 - Fixed tests to run with php >=7.0
-
 
 ## 1.0.2 - 2017-05-21
 ### Changed
