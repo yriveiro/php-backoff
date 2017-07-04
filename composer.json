@@ -10,11 +10,11 @@
         "email": "yago.riveiro@gmail.com"
     }],
     "require": {
-        "php": ">=5.3.3 || ^7.0",
+        "php": ">=7.0",
         "paragonie/random_compat": "^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.8 || ~6.1",
+        "phpunit/phpunit": "~6.2",
         "satooshi/php-coveralls": "~1.0"
     },
     "autoload": {

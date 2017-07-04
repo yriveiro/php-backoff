@@ -6,7 +6,7 @@ use ReflectionProperty;
 use InvalidArgumentException;
 use Yriveiro\Backoff\Backoff;
 use Yriveiro\Backoff\BackoffException;
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class BackoffTest extends TestCase
 {
