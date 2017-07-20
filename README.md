@@ -3,7 +3,7 @@
 [![License](https://poser.pugx.org/yriveiro/php-backoff/license)](https://packagist.org/packages/yriveiro/php-backoff) [![Build Status](https://travis-ci.org/yriveiro/php-backoff.svg?branch=master)](https://travis-ci.org/yriveiro/php-backoff) [![Coverage Status](https://coveralls.io/repos/github/yriveiro/php-backoff/badge.svg)](https://coveralls.io/github/yriveiro/php-backoff) [![Total Downloads](https://poser.pugx.org/yriveiro/php-backoff/downloads)](https://packagist.org/packages/yriveiro/php-backoff) [![HHVM Status](http://hhvm.h4cc.de/badge/yriveiro/php-backoff.svg)](http://hhvm.h4cc.de/package/yriveiro/php-backoff)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/0f1a7b44-98e9-4577-819f-7df811338082/mini.png)](https://insight.sensiolabs.com/projects/0f1a7b44-98e9-4577-819f-7df811338082)
 
-**NOTE**: to use php-backoff with PHP 5.x please use the lasted release of branch 1.x
+**NOTE**: to use php-backoff with PHP 5.x please use the lastet release of branch 1.x
 
 # API
 
