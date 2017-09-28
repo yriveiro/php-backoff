@@ -7,13 +7,13 @@ use Yriveiro\Backoff\BackoffInterface;
 
 class Backoff implements BackoffInterface
 {
-    protected $options = array();
+    protected $options = [];
 
     /**
      * @param array $options Configuration options.
      * @throws \InvalidArgumentException.
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->options = array_merge($this->getDefaultOptions(), $options);
 
@@ -35,12 +35,12 @@ class Backoff implements BackoffInterface
      *
      * @return mixed
      */
-    public static function getDefaultOptions()
+    public static function getDefaultOptions() : array
     {
-        return array(
+        return [
             'cap' => 1000000,
             'maxAttempts' => 0
-        );
+    	];
     }
 
     /**
@@ -51,7 +51,7 @@ class Backoff implements BackoffInterface
     public function setOptions($options)
     {
         if (!is_array($options)) {
-            $options = array($options);
+            $options = [$options];
         }
 
         $this->options = array_merge($this->options, $options);
@@ -74,7 +74,7 @@ class Backoff implements BackoffInterface
      *
      * @throws \InvalidArgumentException.
      */
-    public function exponential($attempt)
+    public function exponential($attempt) : float
     {
         if (!is_int($attempt)) {
             throw new InvalidArgumentException('Attempt must be an integer');
@@ -107,7 +107,7 @@ class Backoff implements BackoffInterface
      *
      * @return int
      */
-    public function equalJitter($attempt)
+    public function equalJitter($attempt) : int
     {
         $half = ($this->exponential($attempt) / 2);
 
@@ -121,7 +121,7 @@ class Backoff implements BackoffInterface
      *
      * @return int
      */
-    public function fullJitter($attempt)
+    public function fullJitter($attempt) : int
     {
         return (int) floor($this->random(0.0, $this->exponential($attempt) / 2));
     }
@@ -132,9 +132,9 @@ class Backoff implements BackoffInterface
      * @param float $min
      * @param float $max
      *
-     * @return double
+     * @return float
      */
-    protected function random($min, $max)
+    protected function random($min, $max) : float
     {
         return ($min + lcg_value() * (abs($max - $min)));
     }
