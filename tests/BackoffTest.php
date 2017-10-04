@@ -1,5 +1,5 @@
 <?php
-namespace Yriveiro\Solr\Tests;
+namespace Yriveiro\Backoff\Tests;
 
 use ReflectionMethod;
 use ReflectionProperty;
