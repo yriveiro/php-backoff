@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.0.2 - 2018-01-13
+### Changed
+- Improve code fixing PHPStan complains.
+- Fixed some issues with Travis CI.
+
 ## 2.0.1 - 2017-07-04
 ### Changed
 - Removed unused dependency random compact
