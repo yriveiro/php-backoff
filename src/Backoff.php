@@ -29,11 +29,11 @@ class Backoff implements BackoffInterface
     /**
      * Returns an array of Configuration.
      *
-     * cap:         Max duration allowed (in microseconds). If backoff duration
-     *              is greater than cap, cap is returned.
+     * cap:          Max duration allowed (in microseconds). If backoff duration
+     *               is greater than cap, cap is returned.
      * maxAttempts:  Number of attemps before thrown an Yriveiro\Backoff\BackoffException.
      *
-     * @return mixed
+     * @return array
      */
     public static function getDefaultOptions() : array
     {
@@ -46,9 +46,11 @@ class Backoff implements BackoffInterface
     /**
      * Allows overwrite default option values.
      *
-     * @param mixed
+     * @param array $options Configuration options.
+     *
+     * @return BackoffInterface
      */
-    public function setOptions($options)
+    public function setOptions($options) : BackoffInterface
     {
         if (!is_array($options)) {
             $options = [$options];

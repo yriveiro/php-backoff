@@ -10,7 +10,8 @@
         "email": "yago.riveiro@gmail.com"
     }],
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "phpstan/phpstan": "^0.9.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.2",
@@ -27,4 +28,3 @@
         }
     }
 }
-

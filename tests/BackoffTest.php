@@ -10,6 +10,8 @@ use PHPUnit\Framework\TestCase;
 
 class BackoffTest extends TestCase
 {
+    protected $backoff;
+
     public function setUp()
     {
         $this->backoff = new Backoff();
