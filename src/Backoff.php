@@ -31,7 +31,7 @@ class Backoff implements BackoffInterface
      *
      * cap:          Max duration allowed (in microseconds). If backoff duration
      *               is greater than cap, cap is returned.
-     * maxAttempts:  Number of attemps before thrown an Yriveiro\Backoff\BackoffException.
+     * maxAttempts:  Number of attempts before thrown an Yriveiro\Backoff\BackoffException.
      *
      * @return array
      */
