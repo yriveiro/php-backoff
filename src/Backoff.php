@@ -86,9 +86,7 @@ class Backoff implements BackoffInterface
             throw new InvalidArgumentException('Attempt must be >= 1');
         }
 
-        if ($this->options['maxAttempts'] > 1
-            && $attempt > $this->options['maxAttempts']
-        ) {
+        if ($this->maxAttempsExceeded($attempt)) {
             throw new BackoffException(
                 sprintf(
                     "The number of max attempts (%s) was exceeded",
@@ -139,5 +137,18 @@ class Backoff implements BackoffInterface
     protected function random($min, $max) : float
     {
         return ($min + lcg_value() * (abs($max - $min)));
+    }
+
+    /**
+     * Check if we are above the maximum number of attempts.
+     *
+     * @param int $attempt the current attempt of retry.
+     *
+     * @return bool
+     */
+    private function maxAttempsExceeded($attempt) : bool
+    {
+        return ($this->options['maxAttempts'] > 1
+                && $attempt > $this->options['maxAttempts']);
     }
 }
