@@ -10,12 +10,12 @@
         "email": "yago.riveiro@gmail.com"
     }],
     "require": {
-        "php": ">=7.0",
-        "phpstan/phpstan": "^0.9.1"
+        "php": ">=7.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.2",
-        "satooshi/php-coveralls": "~1.0"
+        "satooshi/php-coveralls": "~1.0",
+        "phpstan/phpstan": "^0.9.1"
     },
     "autoload": {
         "psr-4": {
