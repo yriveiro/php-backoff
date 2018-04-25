@@ -3,8 +3,8 @@ namespace Yriveiro\Backoff;
 
 interface BackoffInterface
 {
-    public static function getDefaultOptions();
-    public function exponential($attempt);
-    public function equalJitter($attempt);
-    public function fullJitter($attempt);
+    public static function getDefaultOptions() : array;
+    public function exponential(int $attempt) : float;
+    public function equalJitter(int $attempt) : int;
+    public function fullJitter(int $attempt) : int;
 }

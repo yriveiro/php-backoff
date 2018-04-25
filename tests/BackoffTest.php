@@ -1,6 +1,7 @@
 <?php
 namespace Yriveiro\Backoff\Tests;
 
+use TypeError;
 use ReflectionMethod;
 use ReflectionProperty;
 use InvalidArgumentException;
@@ -166,7 +167,11 @@ class BackoffTest extends TestCase
      */
     public function testWrongAttemptType()
     {
-        $this->backoff->exponential('foo');
+        try {
+            $this->backoff->exponential('foo');
+        } catch (TypeError $e) {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**

@@ -13,7 +13,7 @@ class Backoff implements BackoffInterface
      * @param array $options Configuration options.
      * @throws \InvalidArgumentException.
      */
-    public function __construct($options = [])
+    public function __construct(array $options = [])
     {
         $this->options = array_merge($this->getDefaultOptions(), $options);
 
@@ -76,7 +76,7 @@ class Backoff implements BackoffInterface
      *
      * @throws \InvalidArgumentException.
      */
-    public function exponential($attempt) : float
+    public function exponential(int $attempt) : float
     {
         if (!is_int($attempt)) {
             throw new InvalidArgumentException('Attempt must be an integer');
@@ -107,7 +107,7 @@ class Backoff implements BackoffInterface
      *
      * @return int
      */
-    public function equalJitter($attempt) : int
+    public function equalJitter(int $attempt) : int
     {
         $half = ($this->exponential($attempt) / 2);
 
@@ -121,7 +121,7 @@ class Backoff implements BackoffInterface
      *
      * @return int
      */
-    public function fullJitter($attempt) : int
+    public function fullJitter(int $attempt) : int
     {
         return (int) floor($this->random(0.0, $this->exponential($attempt) / 2));
     }
@@ -134,7 +134,7 @@ class Backoff implements BackoffInterface
      *
      * @return float
      */
-    protected function random($min, $max) : float
+    protected function random(float $min, float $max) : float
     {
         return ($min + lcg_value() * (abs($max - $min)));
     }
@@ -146,7 +146,7 @@ class Backoff implements BackoffInterface
      *
      * @return bool
      */
-    private function maxAttempsExceeded($attempt) : bool
+    private function maxAttempsExceeded(int $attempt) : bool
     {
         return ($this->options['maxAttempts'] > 1
                 && $attempt > $this->options['maxAttempts']);
