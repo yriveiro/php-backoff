@@ -50,12 +50,8 @@ class Backoff implements BackoffInterface
      *
      * @return BackoffInterface
      */
-    public function setOptions($options) : BackoffInterface
+    public function setOptions(array $options) : BackoffInterface
     {
-        if (!is_array($options)) {
-            $options = [$options];
-        }
-
         $this->options = array_merge($this->options, $options);
 
         return $this;

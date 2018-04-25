@@ -94,22 +94,16 @@ class BackoffTest extends TestCase
         $this->assertEquals($expected, $options->getValue($this->backoff));
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
     public function testSetOptionsNotAnArray()
     {
-        $options = 10;
-
-        $this->backoff->setOptions($options);
-
-        $options = new ReflectionProperty($this->backoff, 'options');
-        $options->setAccessible(true);
-
-        $expected = array(
-            0 => 10,
-            'cap' => 1000000,
-            'maxAttempts' => 0
-        );
-
-        $this->assertEquals($expected, $options->getValue($this->backoff));
+        try {
+            $this->backoff->setOptions(10);
+        } catch (TypeError $e) {
+            throw new InvalidArgumentException();
+        }
     }
 
     /**
