@@ -2,11 +2,9 @@
 namespace Yriveiro\Backoff\Tests;
 
 use TypeError;
-use ReflectionMethod;
 use ReflectionProperty;
 use InvalidArgumentException;
 use Yriveiro\Backoff\Backoff;
-use Yriveiro\Backoff\BackoffException;
 use PHPUnit\Framework\TestCase;
 
 class BackoffTest extends TestCase
@@ -69,12 +67,12 @@ class BackoffTest extends TestCase
     public function testDefaultOptions()
     {
         $actual = Backoff::getDefaultOptions();
-        $expected = array(
+        $expected = [
             'cap' => 1000000,
-            'maxAttempts' => 0
-        );
+            'maxAttempts' => 0,
+        ];
 
-        $this->assertEquals($expected, $actual, "Default options differ");
+        $this->assertEquals($expected, $actual, 'Default options differ');
     }
 
     public function testSetOptions()
@@ -86,10 +84,10 @@ class BackoffTest extends TestCase
         $options = new ReflectionProperty($this->backoff, 'options');
         $options->setAccessible(true);
 
-        $expected = array(
+        $expected = [
             'cap' => 1000000,
-            'maxAttempts' => 10
-        );
+            'maxAttempts' => 10,
+        ];
 
         $this->assertEquals($expected, $options->getValue($this->backoff));
     }

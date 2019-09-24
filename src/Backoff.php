@@ -2,16 +2,15 @@
 namespace Yriveiro\Backoff;
 
 use InvalidArgumentException;
-use Yriveiro\Backoff\BackoffException;
-use Yriveiro\Backoff\BackoffInterface;
 
 class Backoff implements BackoffInterface
 {
     protected $options = [];
 
     /**
-     * @param array $options Configuration options.
-     * @throws \InvalidArgumentException.
+     * @param array $options configuration options
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct(array $options = [])
     {
@@ -35,22 +34,22 @@ class Backoff implements BackoffInterface
      *
      * @return array
      */
-    public static function getDefaultOptions() : array
+    public static function getDefaultOptions(): array
     {
         return [
             'cap' => 1000000,
-            'maxAttempts' => 0
-    	];
+            'maxAttempts' => 0,
+        ];
     }
 
     /**
      * Allows overwrite default option values.
      *
-     * @param array $options Configuration options.
+     * @param array $options configuration options
      *
      * @return BackoffInterface
      */
-    public function setOptions(array $options) : BackoffInterface
+    public function setOptions(array $options): BackoffInterface
     {
         $this->options = array_merge($this->options, $options);
 
@@ -64,15 +63,15 @@ class Backoff implements BackoffInterface
      *
      * E(c) = (2**c - 1)
      *
-     * @param int $attempt Attempt number.
+     * @param int $attempt attempt number
      *
      * @return float Time to sleep in microseconds before a new retry. The value
      *               is in microseconds to use with usleep, sleep function only
      *               works with seconds
      *
-     * @throws \InvalidArgumentException.
+     * @throws \InvalidArgumentException
      */
-    public function exponential(int $attempt) : float
+    public function exponential(int $attempt): float
     {
         if (!is_int($attempt)) {
             throw new InvalidArgumentException('Attempt must be an integer');
@@ -85,7 +84,7 @@ class Backoff implements BackoffInterface
         if ($this->maxAttempsExceeded($attempt)) {
             throw new BackoffException(
                 sprintf(
-                    "The number of max attempts (%s) was exceeded",
+                    'The number of max attempts (%s) was exceeded',
                     $this->options['maxAttempts']
                 )
             );
@@ -99,11 +98,11 @@ class Backoff implements BackoffInterface
     /**
      * This method adds a half jitter value to exponential backoff value.
      *
-     * @param int $attempt Attempt number.
+     * @param int $attempt attempt number
      *
      * @return int
      */
-    public function equalJitter(int $attempt) : int
+    public function equalJitter(int $attempt): int
     {
         $half = ($this->exponential($attempt) / 2);
 
@@ -113,11 +112,11 @@ class Backoff implements BackoffInterface
     /**
      * This method adds a jitter value to exponential backoff value.
      *
-     * @param int $attempt Attempt number.
+     * @param int $attempt attempt number
      *
      * @return int
      */
-    public function fullJitter(int $attempt) : int
+    public function fullJitter(int $attempt): int
     {
         return (int) floor($this->random(0.0, $this->exponential($attempt) / 2));
     }
@@ -130,21 +129,21 @@ class Backoff implements BackoffInterface
      *
      * @return float
      */
-    protected function random(float $min, float $max) : float
+    protected function random(float $min, float $max): float
     {
-        return ($min + lcg_value() * (abs($max - $min)));
+        return $min + lcg_value() * (abs($max - $min));
     }
 
     /**
      * Check if we are above the maximum number of attempts.
      *
-     * @param int $attempt the current attempt of retry.
+     * @param int $attempt the current attempt of retry
      *
      * @return bool
      */
-    private function maxAttempsExceeded(int $attempt) : bool
+    private function maxAttempsExceeded(int $attempt): bool
     {
-        return ($this->options['maxAttempts'] > 1
-                && $attempt > $this->options['maxAttempts']);
+        return $this->options['maxAttempts'] > 1
+                && $attempt > $this->options['maxAttempts'];
     }
 }
