@@ -9,11 +9,9 @@ php:
   - 7.3
   - 7.4
   - nightly
-  - hhvm-nightly
 
 matrix:
   allow_failures:
-    - php: hhvm-nightly
     - php: nightly
 
 before_script:
