@@ -2,13 +2,25 @@
     "name": "yriveiro/php-backoff",
     "description": "Simple backoff / retry functionality",
     "type": "library",
-    "keywords": ["exponential backoff", "backoff", "jitter", "retry"],
+    "keywords": [
+        "exponential backoff",
+        "backoff",
+        "jitter",
+        "retry"
+    ],
     "minimum-stability": "stable",
     "license": "MIT",
-    "authors": [{
-        "name": "Yago Riveiro",
-        "email": "yago.riveiro@gmail.com"
-    }],
+    "authors": [
+        {
+            "name": "Yago Riveiro",
+            "email": "yago.riveiro@gmail.com"
+        },
+        {
+            "name": "Sergey Gripinskiy",
+            "email": "web-architect@mail.ru",
+            "role": "Contributor"
+        }
+    ],
     "require": {
         "php": ">=7.0"
     },

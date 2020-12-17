@@ -1,53 +1,47 @@
 <?php
+
 namespace Yriveiro\Backoff;
 
 use InvalidArgumentException;
 
 class Backoff implements BackoffInterface
 {
+    /**
+     * @var array
+     */
     protected $options = [];
 
     /**
      * @param array $options configuration options
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function __construct(array $options = [])
     {
         $this->options = array_merge($this->getDefaultOptions(), $options);
 
-        if (!is_int($this->options['cap'])) {
+        if (!is_int($this->options[BackoffInterface::OPTION_CAP])) {
             throw new InvalidArgumentException('Cap must be a number');
         }
 
-        if (!is_int($this->options['maxAttempts'])) {
+        if (!is_int($this->options[BackoffInterface::OPTION_MAX_ATTEMPTS])) {
             throw new InvalidArgumentException('maxAttempts must be a number');
         }
     }
 
     /**
-     * Returns an array of Configuration.
-     *
-     * cap:          Max duration allowed (in microseconds). If backoff duration
-     *               is greater than cap, cap is returned.
-     * maxAttempts:  Number of attempts before thrown an Yriveiro\Backoff\BackoffException.
-     *
-     * @return array
+     * @inheritDoc
      */
     public static function getDefaultOptions(): array
     {
         return [
-            'cap' => 1000000,
-            'maxAttempts' => 0,
+            BackoffInterface::OPTION_CAP          => 1000000,
+            BackoffInterface::OPTION_MAX_ATTEMPTS => 0,
         ];
     }
 
     /**
-     * Allows overwrite default option values.
-     *
-     * @param array $options configuration options
-     *
-     * @return BackoffInterface
+     * @inheritDoc
      */
     public function setOptions(array $options): BackoffInterface
     {
@@ -57,19 +51,7 @@ class Backoff implements BackoffInterface
     }
 
     /**
-     * Exponential backoff algorithm.
-     *
-     * c = attempt
-     *
-     * E(c) = (2**c - 1)
-     *
-     * @param int $attempt attempt number
-     *
-     * @return float Time to sleep in microseconds before a new retry. The value
-     *               is in microseconds to use with usleep, sleep function only
-     *               works with seconds
-     *
-     * @throws \InvalidArgumentException
+     * @inheritDoc
      */
     public function exponential(int $attempt): float
     {
@@ -81,44 +63,37 @@ class Backoff implements BackoffInterface
             throw new InvalidArgumentException('Attempt must be >= 1');
         }
 
-        if ($this->maxAttempsExceeded($attempt)) {
+        if ($this->maxAttemptsExceeded($attempt)) {
             throw new BackoffException(
                 sprintf(
                     'The number of max attempts (%s) was exceeded',
-                    $this->options['maxAttempts']
+                    $this->options[BackoffInterface::OPTION_MAX_ATTEMPTS]
                 )
             );
         }
 
         $wait = (1 << ($attempt - 1)) * 1000;
 
-        return ($this->options['cap'] < $wait) ? $this->options['cap'] : $wait;
+        return ($this->options[BackoffInterface::OPTION_CAP]
+            < $wait) ? $this->options[BackoffInterface::OPTION_CAP] : $wait;
     }
 
     /**
-     * This method adds a half jitter value to exponential backoff value.
-     *
-     * @param int $attempt attempt number
-     *
-     * @return int
+     * @inheritDoc
      */
     public function equalJitter(int $attempt): int
     {
         $half = ($this->exponential($attempt) / 2);
 
-        return (int) floor($half + $this->random(0.0, $half));
+        return (int)floor($half + $this->random(0.0, $half));
     }
 
     /**
-     * This method adds a jitter value to exponential backoff value.
-     *
-     * @param int $attempt attempt number
-     *
-     * @return int
+     * @inheritDoc
      */
     public function fullJitter(int $attempt): int
     {
-        return (int) floor($this->random(0.0, $this->exponential($attempt) / 2));
+        return (int)floor($this->random(0.0, $this->exponential($attempt) / 2));
     }
 
     /**
@@ -141,9 +116,9 @@ class Backoff implements BackoffInterface
      *
      * @return bool
      */
-    private function maxAttempsExceeded(int $attempt): bool
+    private function maxAttemptsExceeded(int $attempt): bool
     {
-        return $this->options['maxAttempts'] > 1
-                && $attempt > $this->options['maxAttempts'];
+        return $this->options[BackoffInterface::OPTION_MAX_ATTEMPTS] > 1
+            && $attempt > $this->options[BackoffInterface::OPTION_MAX_ATTEMPTS];
     }
 }
