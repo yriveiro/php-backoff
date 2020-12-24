@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.1.1 - 2020-12-24
+### Changed
+- [#12](https://github.com/yriveiro/php-backoff/pull/12)PhpDoc blocks and options constants
+
 ## 2.1.0 - 2018-04-26
 ### Changed
 - [#8](https://github.com/yriveiro/php-backoff/issues/8) Move phpstan to require-dev section
